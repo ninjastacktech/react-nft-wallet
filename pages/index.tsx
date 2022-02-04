@@ -9,7 +9,7 @@ const Home: NextPage = () => {
         <title>Ninja NFT Wallet</title>
       </Head>
 
-      <main className={styles.main}>Main Content 2</main>
+      <main className={styles.main}>Main Content 3</main>
 
       <footer className={styles.footer}>Footer content</footer>
     </div>
