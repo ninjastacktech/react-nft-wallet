@@ -30,7 +30,6 @@ const Header: FunctionComponent<any> = () => {
               </IconSocial>
 
               <ThemeSwitcher/>
-              <Profile />
             </div>
           </div>
         </div>

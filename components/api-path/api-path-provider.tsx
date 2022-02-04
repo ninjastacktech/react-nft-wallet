@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { injectable, Container } from 'inversify';
+import 'reflect-metadata';
+import { Provider } from 'inversify-react';
 
-export const ApiPathContext = React.createContext<{ apiBasePath: string }>({ apiBasePath: '/' });
+
+@injectable()
+export class ApiBasePath {
+  readonly basePath = process.env.NEXT_PUBLIC_API_PATH || '/';
+}
 
 export interface ApiPathProps {
   children: React.ReactNode;
 }
 
 export const ApiPathProvider = ({ children }: ApiPathProps) => {
-  const pathValue = { apiBasePath: process.env.NEXT_PUBLIC_API_PATH || '/' };
-  return <ApiPathContext.Provider value={pathValue}>{children}</ApiPathContext.Provider>;
+  const [container] = useState(() => {
+    const c = new Container();
+    c.bind(ApiBasePath).toSelf();
+    return c;
+  });
+  return <Provider container={container}>{children}</Provider>;
 };

@@ -1,6 +1,8 @@
+import { useInjection } from 'inversify-react';
 import * as React from 'react';
 import { useContext, useEffect, useState } from 'react';
-import { ApiPathContext } from '../../api-path/api-path-provider';
+import { ApiBasePath } from '../../api-path/api-path-provider';
+// import { ApiPathContext } from '../../api-path/api-path-provider';
 
 export interface IProfileProps {}
 
@@ -8,17 +10,19 @@ export function Profile(props: IProfileProps) {
   const [data, setData] = useState<any>(null);
   const [isLoading, setLoading] = useState(false);
 
-  const { apiBasePath } = useContext(ApiPathContext);
+  const path = useInjection(ApiBasePath);
+
+//   const { apiBasePath } = useContext(ApiPathContext);
 
   useEffect(() => {
     setLoading(true);
-    fetch(apiBasePath + 'entries')
+    fetch(path.basePath + 'entries')
       .then((res) => res.json())
       .then((data) => {
         setData(data);
         setLoading(false);
       });
-  }, [apiBasePath]);
+  }, [path]);
 
   if (isLoading) return <p>Loading...</p>;
   if (!data) return <p>No profile data</p>;
