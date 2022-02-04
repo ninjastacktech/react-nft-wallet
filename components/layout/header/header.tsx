@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import IconSocial from './icon-social';
 import Logo from './logo';
 import ThemeSwitcher from '../../theme/theme-switcher';
+import { Profile } from './profile';
 
 const Header: FunctionComponent<any> = () => {
   return (
@@ -29,6 +30,7 @@ const Header: FunctionComponent<any> = () => {
               </IconSocial>
 
               <ThemeSwitcher/>
+              <Profile />
             </div>
           </div>
         </div>

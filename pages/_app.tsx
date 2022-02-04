@@ -2,7 +2,8 @@ import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import Layout from '../components/layout/layout';
 import { useState } from 'react';
-import {ThemeProvider} from '../components/theme/theme-context';
+import { ThemeProvider } from '../components/theme/theme-context';
+import { ApiPathProvider } from '../components/api-path/api-path-provider';
 
 function MyApp({ Component, pageProps }: AppProps) {
   // const [theme, setTheme] = useState('light');
@@ -10,9 +11,11 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <ThemeProvider>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <ApiPathProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ApiPathProvider>
     </ThemeProvider>
   );
 }
