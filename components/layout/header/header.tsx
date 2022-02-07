@@ -3,6 +3,10 @@ import IconSocial from './icon-social';
 import Logo from './logo';
 import ThemeSwitcher from '../../theme/theme-switcher';
 import { Profile } from './profile';
+import dynamic from 'next/dynamic';
+
+const MetaMaskCard = dynamic(() => import('../../wallet/components/connectors/MetaMaskCard'), { ssr: false })
+
 
 const Header: FunctionComponent<any> = () => {
   return (
@@ -30,6 +34,8 @@ const Header: FunctionComponent<any> = () => {
               </IconSocial>
 
               <ThemeSwitcher/>
+
+              <MetaMaskCard/>
             </div>
           </div>
         </div>

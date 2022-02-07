@@ -9,6 +9,15 @@
     "no-jekyll": "touch ./out/.nojekyll"
   },
   "dependencies": {
+    "@ethersproject/bignumber": "^5.5.0",
+    "@ethersproject/units": "^5.5.0",
+    "@walletconnect/ethereum-provider": "^1.7.1",
+    "@web3-react/core": "8.0.10-beta.0",
+    "@web3-react/metamask": "8.0.6-beta.0",
+    "@web3-react/network": "8.0.5-beta.0",
+    "@web3-react/types": "8.0.3-beta.0",
+    "@web3-react/walletconnect": "8.0.8-beta.0",
+    "@web3-react/walletlink": "8.0.10-beta.0",
     "inversify": "^6.0.1",
     "inversify-react": "^1.0.1",
     "next": "12.0.10",
