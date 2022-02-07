@@ -13,7 +13,7 @@ function Select({
   chainIds,
 }: {
   chainId: number;
-  switchChain: (chainId: number) => void | undefined;
+  switchChain: (chainId: number) => Promise<void>;
   displayDefault: boolean;
   chainIds: number[];
 }) {
