@@ -1,6 +1,7 @@
 import { Dialog, Transition } from '@headlessui/react';
 import * as React from 'react';
 import { Fragment, useState } from 'react';
+import Web3 from 'web3';
 import { AuthContext } from '../auth/auth-context';
 import MetaMaskButton from './MetaMaskButton';
 
@@ -9,6 +10,20 @@ export interface IAccountConnectorProps {}
 const AccountConnector = (props: IAccountConnectorProps) => {
   const { authState, authDispatch } = React.useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
+  const [pendingAddress, setPendingAddress] = useState('');
+
+  const handleAddressChange = (ev) => {
+    setPendingAddress(ev.target.value);
+  };
+
+  const addAddress = () => {
+    const isValidAddress = Web3.utils.isAddress(pendingAddress);
+
+    if (isValidAddress) {
+      setIsOpen(false);
+      authDispatch({ type: 'connect', payload: { address: pendingAddress } });
+    }
+  };
 
   if (authState.isAuthenticated) {
     return <div>Welcome {authState.address}</div>;
@@ -54,23 +69,29 @@ const AccountConnector = (props: IAccountConnectorProps) => {
               leave="ease-in duration-200"
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95">
-              <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-                <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
-                  Payment successful
+              <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl dark:bg-slate-800">
+                <Dialog.Title as="h3" className="text-lg font-medium leading-6">
+                  Enter Address
                 </Dialog.Title>
-                <div className="mt-2">
-                  <p className="text-sm text-gray-500">
-                    Your payment has been successfully submitted. We’ve sent you an email with all of the details of
-                    your order.
+                <div className="mt-2 mb-5">
+                  <p className="text-sm">
+                    Avoid connecting your wallet and simply paste in your address directly
                   </p>
                 </div>
 
+                <input
+                  type="text"
+                  id="ethAddress"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-700 dark:focus:border-gray-700"
+                  required
+                  onChange={handleAddressChange}
+                />
+
                 <div className="mt-4">
                   <button
-                    type="button"
-                    className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
-                    onClick={() => setIsOpen(false)}>
-                    Got it, thanks!
+                    onClick={addAddress}
+                    className={`bg-slate-900 hover:bg-slate-700 text-white rounded-lg w-full flex items-center justify-center dark:bg-sky-500 dark:highlight-white/20 dark:hover:bg-sky-400 font-medium rounded-lg text-base px-6 py-3.5`}>
+                    Add
                   </button>
                 </div>
               </div>
