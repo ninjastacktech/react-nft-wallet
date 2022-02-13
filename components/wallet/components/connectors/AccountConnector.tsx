@@ -1,6 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react';
-import * as React from 'react';
-import { Fragment, useState } from 'react';
+import { FormEvent, Fragment, useContext, useState } from 'react';
 import Web3 from 'web3';
 import { AuthContext } from '../auth/auth-context';
 import MetaMaskButton from './MetaMaskButton';
@@ -8,12 +7,12 @@ import MetaMaskButton from './MetaMaskButton';
 export interface IAccountConnectorProps {}
 
 const AccountConnector = (props: IAccountConnectorProps) => {
-  const { authState, authDispatch } = React.useContext(AuthContext);
+  const { authState, authDispatch } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const [pendingAddress, setPendingAddress] = useState('');
 
-  const handleAddressChange = (ev) => {
-    setPendingAddress(ev.target.value);
+  const handleAddressChange = (ev: FormEvent<HTMLInputElement>) => {
+    setPendingAddress(ev.currentTarget.value);
   };
 
   const addAddress = () => {
