@@ -19,7 +19,7 @@ const ThemeSwitcher: React.FunctionComponent = () => {
       </svg>
     );
   return (
-    <div className="flex items-center border-l border-slate-200 ml-6 pl-6 dark:border-slate-800">
+    <div className="flex items-center border-l border-r border-slate-200 ml-6 pl-6 mr-6 pr-6 dark:border-slate-800">
       <button
         onClick={() => changeTheme('toggle')}
         type="button"

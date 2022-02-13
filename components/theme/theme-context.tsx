@@ -46,7 +46,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
     }
   };
 
-  const currentState = { theme: 'light' }; //loadThemeFromLocalStorage();
+  const currentState = { theme: 'light' };
   const [state, changeTheme] = React.useReducer(themeReducer, currentState);
 
   const stateRef = useRef<{ theme: string }>();

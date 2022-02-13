@@ -11,6 +11,8 @@
   "dependencies": {
     "@ethersproject/bignumber": "^5.5.0",
     "@ethersproject/units": "^5.5.0",
+    "@headlessui/react": "^1.4.3",
+    "@heroicons/react": "^1.0.5",
     "@walletconnect/ethereum-provider": "^1.7.1",
     "@web3-react/core": "8.0.10-beta.0",
     "@web3-react/metamask": "8.0.6-beta.0",
@@ -23,7 +25,8 @@
     "next": "12.0.10",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "tailwindcss": "^3.0.18"
   },
   "devDependencies": {
     "@types/node": "17.0.14",
@@ -32,7 +35,6 @@
     "eslint": "8.8.0",
     "eslint-config-next": "12.0.10",
     "postcss": "^8.4.6",
-    "tailwindcss": "^3.0.18",
     "touch-cli": "0.0.1",
     "typescript": "4.5.5"
   }
