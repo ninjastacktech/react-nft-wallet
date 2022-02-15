@@ -19,7 +19,8 @@ const Home: NextPage = () => {
         <div>
           <AccountConnector />
         </div>
-        {/* <CollectionsList /> */}
+
+        <CollectionsList />
       </main>
 
       <footer className={styles.footer}>Footer content</footer>
