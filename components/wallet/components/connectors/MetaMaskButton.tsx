@@ -20,6 +20,11 @@ const MetaMaskButton = ({ size, className }: MetaMaskButtonProps = { size: 'medi
 
   const connect = metaMask.activate.bind(metaMask, getAddChainParameters(1));
 
+  const disconnect = () => {
+    metaMask.deactivate();
+    authDispatch({ type: 'disconnect' });
+  };
+
   useEffect(() => {
     if (accounts?.length > 0 && accounts[0]) {
       authDispatch({ type: 'connect', payload: { address: accounts[0] } });
@@ -41,16 +46,23 @@ const MetaMaskButton = ({ size, className }: MetaMaskButtonProps = { size: 'medi
         </button>
       </div>
     );
-  } else if (isActive) {
+  } else if (authState.isAuthenticated) {
     return (
-      <div className={className}>
+      <div className={className + ' flex flex-row'}>
         <button
-          onClick={() => metaMask.deactivate()}
+          onClick={() => disconnect()}
           className={`
-      bg-slate-100 hover:bg-slate-300 text-slate-900 rounded-lg w-full flex items-center justify-center dark:bg-slate-600 dark:text-slate-400 dark:highlight-white/10 dark:hover:bg-slate-700 ${buttonSizeClasses} 
+      bg-slate-100 hover:bg-slate-300 text-slate-900 rounded-lg w-full flex items-center justify-center dark:bg-slate-600 dark:text-slate-400 dark:highlight-white/10 dark:hover:bg-slate-700 mr-2 ${buttonSizeClasses} 
         `}>
           Disconnect
         </button>
+
+        <div
+          className={`
+          bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-400 border-4 radius border-slate-100 dark:border-slate-800 rounded-lg w-full flex items-center justify-center ${buttonSizeClasses} 
+        `}>
+          {`${authState.address.slice(0, 4)}...${authState.address.slice(-4)}`}
+        </div>
       </div>
     );
   } else if (isActivating) {
