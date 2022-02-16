@@ -9,24 +9,33 @@ const CollectionAsset: React.FunctionComponent<ICollectionAssetProps> = (props) 
   const name = props.asset.name ?? `#${props.asset.tokenId}`;
 
   return (
-    <div className="w-60 h-72">
-      <div>{name}</div>
-      {props.asset.animationUrl && (
-        <video
-          className=""
-          controlsList="nodownload"
-          playsInline
-          autoPlay
-          loop
-          muted
-          poster={props.asset.imageUrl}
-          preload="metadata">
-          <source src={props.asset.animationUrl} type="video/mp4" />
-        </video>
-      )}
-
-      {!props.asset.animationUrl && props.asset.imageUrl && <img src={props.asset.imageUrl} alt=""></img>}
-    </div>
+    <>
+      <a
+        className="bg-slate-100 dark:bg-slate-800 w-60 h-80 rounded-lg shadow-lg flex flex-col transform transition duration-500 hover:scale-110"
+        href={props.asset.permalink}
+        target="_blank"
+        rel="noreferrer">
+        {props.asset.animationUrl && (
+          <video
+            className="rounded-t-lg"
+            controlsList="nodownload"
+            playsInline
+            autoPlay
+            loop
+            muted
+            poster={props.asset.imageUrl}
+            preload="metadata">
+            <source src={props.asset.animationUrl} type="video/mp4" />
+          </video>
+        )}
+        {!props.asset.animationUrl && props.asset.imageUrl && (
+          <img className="rounded-t-lg" src={props.asset.imageUrl} alt="" />
+        )}
+        <div className="p-6">
+          <h2 className="font-bold mb-2 text-m text-slate-900 dark:text-white">{name}</h2>
+        </div>
+      </a>
+    </>
   );
 };
 

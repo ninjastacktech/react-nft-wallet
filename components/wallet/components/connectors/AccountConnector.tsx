@@ -25,7 +25,7 @@ const AccountConnector = (props: IAccountConnectorProps) => {
   };
 
   if (authState.isAuthenticated) {
-    return <div>Welcome {authState.address}</div>;
+    return <></>;
   }
 
   return (

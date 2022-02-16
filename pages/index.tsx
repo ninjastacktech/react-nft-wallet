@@ -16,14 +16,20 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <div>
+        <div className="flex flex-col items-center mb-8">
+          <a
+            className="flex flex-col items-center border rounded border-slate-800 dark:border-slate-100 w-8/12"
+            href="https://github.com/ninjastacktech/opensea-net"
+            target="_blank"
+            rel="noreferrer">
+            <h5>This is a demo for the OpenSea C# SDK developed by NinjaStack</h5>
+            <span>https://github.com/ninjastacktech/opensea-net</span>
+          </a>
           <AccountConnector />
         </div>
 
         <CollectionsList />
       </main>
-
-      <footer className={styles.footer}>Footer content</footer>
     </div>
   );
 };

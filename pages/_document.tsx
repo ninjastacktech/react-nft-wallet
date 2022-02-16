@@ -14,7 +14,7 @@ class MyDocument extends Document {
           <link rel="icon" href="/favicon.ico" />
           <meta name="description" content="NFT Wallet Collection tracker" />
         </Head>
-        <body className="antialiased text-slate-500 h-full font-body bg-white dark:bg-slate-900">
+        <body className="antialiased text-slate-500 dark:text-slate-400 h-full font-body bg-white dark:bg-slate-900">
           <Main />
           <NextScript />
         </body>
