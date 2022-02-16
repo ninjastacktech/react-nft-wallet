@@ -73,7 +73,7 @@ const CollectionsList = (props: ICollectionsListNewProps) => {
   if (!authConnected) return <p>Not connected...</p>;
 
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="flex flex-col">
       {collections.map((col) => (
         <Collection key={col.slug} collection={col} assets={collectionAssets[col.slug]}></Collection>
       ))}

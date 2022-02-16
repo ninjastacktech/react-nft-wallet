@@ -7,10 +7,10 @@ export interface ICollectionAssetsListProps {
 
 const CollectionAssetsList = (props: ICollectionAssetsListProps) => {
   return (
-    <div>
+    <div className="flex flex-row flex-wrap">
       {props.assets
         ?.map((asset) => {
-          return <CollectionAsset key={asset.name} asset={asset} />;
+          return <CollectionAsset key={asset.tokenId} asset={asset} />;
         })}
     </div>
   );

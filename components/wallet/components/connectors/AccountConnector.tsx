@@ -30,7 +30,7 @@ const AccountConnector = (props: IAccountConnectorProps) => {
 
   return (
     <>
-      <div className="flex justify-center gap-4">
+      <div className="flex justify-center gap-4 mt-8">
         <MetaMaskButton className="w-40" size="large" />
 
         <button
