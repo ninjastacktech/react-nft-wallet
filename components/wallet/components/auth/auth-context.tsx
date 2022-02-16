@@ -3,9 +3,10 @@ import React, { Dispatch } from 'react';
 export type AuthAccountState = {
   isAuthenticated: boolean;
   address?: string | null;
+  ensName?: string | null;
 };
 
-export type AuthAction = { type: 'connect'; payload: { address: string } } | { type: 'disconnect' };
+export type AuthAction = { type: 'connect'; payload: { address: string; ensName?: string } } | { type: 'disconnect' };
 
 export interface AuthProviderProps {
   children: React.ReactNode;
@@ -13,6 +14,7 @@ export interface AuthProviderProps {
 const initialAuthState: AuthAccountState = {
   isAuthenticated: false,
   address: null,
+  ensName: null,
 };
 
 export const AuthContext = React.createContext<{ authState: AuthAccountState; authDispatch: Dispatch<AuthAction> }>({
@@ -23,7 +25,7 @@ export const AuthContext = React.createContext<{ authState: AuthAccountState; au
 function authReducer(state: AuthAccountState, action: AuthAction): AuthAccountState {
   switch (action.type) {
     case 'connect':
-      return { ...state, isAuthenticated: true, address: action.payload.address };
+      return { ...state, isAuthenticated: true, address: action.payload.address, ensName: action.payload.ensName };
     case 'disconnect':
       return { ...state, isAuthenticated: false, address: null };
     default:
