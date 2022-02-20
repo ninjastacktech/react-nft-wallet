@@ -1,17 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 import * as React from 'react';
 
-interface ICollectionAssetProps {
+interface IAssetProps {
   asset: any;
 }
 
-const CollectionAsset: React.FunctionComponent<ICollectionAssetProps> = (props) => {
+const Asset: React.FunctionComponent<IAssetProps> = (props) => {
   const name = props.asset.name ?? `#${props.asset.tokenId}`;
 
   return (
     <>
       <a
-        className="bg-slate-100 dark:bg-slate-800 w-60 h-80 rounded-lg shadow-lg flex flex-col mx-2 transform transition duration-500 hover:scale-110"
+        className="bg-slate-100 dark:bg-slate-800 w-60 h-80 rounded-lg shadow-lg flex flex-col m-2 transform transition duration-500 hover:scale-110"
         href={props.asset.permalink}
         target="_blank"
         rel="noreferrer">
@@ -39,4 +39,4 @@ const CollectionAsset: React.FunctionComponent<ICollectionAssetProps> = (props) 
   );
 };
 
-export default CollectionAsset;
+export default Asset;

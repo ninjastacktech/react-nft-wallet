@@ -19,7 +19,7 @@ const MetaMaskButton = ({ size, className }: MetaMaskButtonProps = { size: 'medi
   const isActive = useIsActive();
 
   const provider = useProvider();
-  const ENSNames = useENSNames(provider);
+  // const ENSNames = useENSNames(provider);
 
   const connect = metaMask.activate.bind(metaMask, getAddChainParameters(1));
 
@@ -30,11 +30,11 @@ const MetaMaskButton = ({ size, className }: MetaMaskButtonProps = { size: 'medi
 
   useEffect(() => {
     if (accounts?.length > 0 && accounts[0]) {
-      authDispatch({ type: 'connect', payload: { address: accounts[0], ensName: ENSNames?.at(0) } });
+      authDispatch({ type: 'connect', payload: { address: accounts[0] } });
     }
 
     console.log('accounts loaded', accounts);
-  }, [accounts, ENSNames, authDispatch]);
+  }, [accounts, authDispatch]);
 
   const buttonSizeClasses =
     size === 'large' ? 'font-medium rounded-lg text-base px-6 py-3.5' : 'font-medium rounded-lg text-sm px-5 py-2.5';

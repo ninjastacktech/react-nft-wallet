@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
-import CollectionsList from '../components/nft-collections/collections-list';
+import CollectionsListHost from '../components/nft-collections/collections-list-host';
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
@@ -28,7 +28,7 @@ const Home: NextPage = () => {
           <AccountConnector />
         </div>
 
-        <CollectionsList />
+        <CollectionsListHost />
       </main>
     </div>
   );

@@ -36,7 +36,7 @@ const AccountConnector = (props: IAccountConnectorProps) => {
         <button
           onClick={() => setIsOpen(true)}
           className={`
-      bg-slate-100 hover:bg-slate-300 text-slate-900 rounded-lg w-40 flex items-center justify-center dark:bg-slate-600 dark:text-slate-400 dark:highlight-white/10 dark:hover:bg-slate-700 font-medium rounded-lg text-base px-6 py-3.5 
+      bg-slate-100 hover:bg-slate-300 text-slate-900 w-40 flex items-center justify-center dark:bg-slate-600 dark:text-slate-400 dark:highlight-white/10 dark:hover:bg-slate-700 font-medium rounded-lg text-base px-6 py-3.5 
         `}>
           Enter Address
         </button>
@@ -89,7 +89,7 @@ const AccountConnector = (props: IAccountConnectorProps) => {
                 <div className="mt-4">
                   <button
                     onClick={addAddress}
-                    className={`bg-slate-900 hover:bg-slate-700 text-white rounded-lg w-full flex items-center justify-center dark:bg-sky-500 dark:highlight-white/20 dark:hover:bg-sky-400 font-medium rounded-lg text-base px-6 py-3.5`}>
+                    className={`bg-slate-900 hover:bg-slate-700 text-white w-full flex items-center justify-center dark:bg-sky-500 dark:highlight-white/20 dark:hover:bg-sky-400 font-medium rounded-lg text-base px-6 py-3.5`}>
                     Add
                   </button>
                 </div>
