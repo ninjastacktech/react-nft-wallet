@@ -5,8 +5,7 @@ import { Fragment } from 'react';
 import { ApiBasePath } from '../api-path/api-path-provider';
 import { AuthContext } from '../wallet/components/auth/auth-context';
 import CollectionsList from './collections-list';
-// import CollectionsListTiles from './collections-list-tiles';
-import { AssetModel, CollectionModel } from './models/collection-models';
+import { CollectionModel } from './models/collection-models';
 
 export const CollectionLayoutContext = React.createContext<{ layout: 'tilesOnly' | 'eager' }>({ layout: 'tilesOnly' });
 
@@ -33,7 +32,6 @@ const CollectionsListHost = (props: ICollectionsListHostNewProps) => {
         .then((res) => res.json())
         .then((data) => {
           setCollections(data?.sort((a: any, b: any) => a.name.localeCompare(b.name)));
-          //b.stats?.averagePrice - a.stats?.averagePrice));
           setLoading(false);
         })
         .catch((err) => {
@@ -62,8 +60,6 @@ const CollectionsListHost = (props: ICollectionsListHostNewProps) => {
     setLayoutWarningDialogOpen(false);
     if (value) {
       setLayout('eager');
-    } else {
-      // setCheckedEagerLayout(false);
     }
   };
 
@@ -73,13 +69,8 @@ const CollectionsListHost = (props: ICollectionsListHostNewProps) => {
     } else {
       setLayout('tilesOnly');
     }
-  }
+  };
 
-  // if (layout === 'eager') {
-  //   return <CollectionsListEager collections={collections} />;
-  // }
-
-  // default layout = tiles
   return (
     <>
       <div className="flex flex-row justify-between m-4">
@@ -109,10 +100,7 @@ const CollectionsListHost = (props: ICollectionsListHostNewProps) => {
       </CollectionLayoutContext.Provider>
 
       <Transition appear show={layoutWarningDialogOpen} as={Fragment}>
-        <Dialog
-          as="div"
-          className="fixed inset-0 z-10 overflow-y-auto"
-          onClose={() => handleConfirmDialog(false)}>
+        <Dialog as="div" className="fixed inset-0 z-10 overflow-y-auto" onClose={() => handleConfirmDialog(false)}>
           <div className="min-h-screen px-4 text-center">
             <Transition.Child
               as={Fragment}

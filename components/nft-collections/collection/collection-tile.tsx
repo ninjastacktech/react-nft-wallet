@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import * as React from 'react';
+import useLocalStorage from '../../../extensions/LocalStorageHook';
 import { AssetModel, CollectionModel } from '../models/collection-models';
 
 interface ICollectionTileProps {
@@ -10,6 +12,11 @@ interface ICollectionTileProps {
 
 const CollectionTile: React.FunctionComponent<ICollectionTileProps> = ({ collection, assets }) => {
   const [visibleAssetIndex, setVisibleAssetIndex] = React.useState(-1);
+
+  const [storedCollection, setStoredCollection] = useLocalStorage('activeCollection', false);
+
+  const router = useRouter();
+  const href = `/collection/${encodeURIComponent(collection.slug)}`;
 
   React.useEffect(() => {
     const assignRandomIndex = () => {
@@ -24,9 +31,16 @@ const CollectionTile: React.FunctionComponent<ICollectionTileProps> = ({ collect
     assignRandomIndex();
   }, [assets]);
 
+  const collectionClick = (ev: React.MouseEvent<HTMLElement>) => {
+    ev.preventDefault();
+
+    setStoredCollection(collection);
+    router.push(href);
+  };
+
   return (
     <>
-      <Link href={`/collection/${encodeURIComponent(collection.slug)}`} passHref>
+      <a href={href} onClick={collectionClick}>
         <div className="flex flex-col justify-between bg-slate-100 dark:bg-slate-800 w-60 shadow-lg rounded m-4 transform transition duration-500 hover:scale-110">
           {/* <div className="py-2 px-4 text-center tracking-wide grid grid-cols-3 gap-6">
           <div className="flex tools text-slate-900 dark:text-white text-sm font-semibold">
@@ -153,7 +167,7 @@ const CollectionTile: React.FunctionComponent<ICollectionTileProps> = ({ collect
             {assets == null && <p className="text-gray-400 text-sm animate-pulse">Loading assets...</p>}
           </div>
         </div>
-      </Link>
+      </a>
     </>
   );
 };
