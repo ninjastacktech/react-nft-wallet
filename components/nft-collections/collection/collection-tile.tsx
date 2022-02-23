@@ -2,15 +2,17 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import * as React from 'react';
+import NumberFormat from 'react-number-format';
 import useLocalStorage from '../../../extensions/LocalStorageHook';
 import { AssetModel, CollectionModel } from '../models/collection-models';
 
 interface ICollectionTileProps {
   collection: CollectionModel;
   assets: AssetModel[];
+  stats?: any;
 }
 
-const CollectionTile: React.FunctionComponent<ICollectionTileProps> = ({ collection, assets }) => {
+const CollectionTile: React.FunctionComponent<ICollectionTileProps> = ({ collection, assets, stats }) => {
   const [visibleAssetIndex, setVisibleAssetIndex] = React.useState(-1);
 
   const [storedCollection, setStoredCollection] = useLocalStorage('activeCollection', false);
@@ -42,26 +44,21 @@ const CollectionTile: React.FunctionComponent<ICollectionTileProps> = ({ collect
     <>
       <a href={href} onClick={collectionClick}>
         <div className="flex flex-col justify-between bg-slate-100 dark:bg-slate-800 w-60 h-80 shadow-lg rounded m-4 transform transition duration-500 hover:scale-110">
-          {/* <div className="py-2 px-4 text-center tracking-wide grid grid-cols-3 gap-6">
-          <div className="flex tools text-slate-900 dark:text-white text-sm font-semibold">
-            <p className="flex justify-center items-center">
-              <svg
-                stroke="currentColor"
-                fill="currentColor"
-                strokeWidth="0"
-                viewBox="0 0 24 24"
-                height="12px"
-                width="12px"
-                xmlns="http://www.w3.org/2000/svg">
-                <g>
-                  <path fill="none" d="M0 0h24v24H0z"></path>
-                  <path d="M20.083 10.5l1.202.721a.5.5 0 0 1 0 .858L12 17.65l-9.285-5.571a.5.5 0 0 1 0-.858l1.202-.721L12 15.35l8.083-4.85zm0 4.7l1.202.721a.5.5 0 0 1 0 .858l-8.77 5.262a1 1 0 0 1-1.03 0l-8.77-5.262a.5.5 0 0 1 0-.858l1.202-.721L12 20.05l8.083-4.85zM12.514 1.309l8.771 5.262a.5.5 0 0 1 0 .858L12 13 2.715 7.429a.5.5 0 0 1 0-.858l8.77-5.262a1 1 0 0 1 1.03 0z"></path>
-                </g>
-              </svg>
-            </p>
-            <p className="animate-pulse px-2">{assets?.length}</p>
-          </div>
-          <div className="flex followers text-slate-900 dark:text-white text-sm font-semibold">
+          <div className="py-2 px-4 text-center tracking-wide grid grid-cols-3 gap-6 h-12">
+            <div className="flex tools text-slate-900 dark:text-white text-sm font-semibold">
+              <p className="flex justify-center items-center"></p>
+              <p className="animate-pulse px-2">
+                <NumberFormat
+                  value={stats?.floorPrice}
+                  prefix="Ξ"
+                  displayType="text"
+                  thousandSeparator={true}
+                  allowNegative={true}
+                  decimalScale={4}
+                />
+              </p>
+            </div>
+            {/* <div className="flex followers text-slate-900 dark:text-white text-sm font-semibold">
             <p className="flex justify-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -96,11 +93,15 @@ const CollectionTile: React.FunctionComponent<ICollectionTileProps> = ({ collect
               </svg>
             </p>
             <p className="animate-pulse px-2">295</p>
+          </div> */}
           </div>
-        </div> */}
           <div className="group relative flex justify-center min-h-[2rem] h-full">
             {assets?.length > 0 && visibleAssetIndex > -1 ? (
-              <img alt="" className="block w-full rounded object-cover animate-fadeIn" src={assets[visibleAssetIndex]?.imagePreviewUrl} />
+              <img
+                alt=""
+                className="block w-full rounded object-cover animate-fadeIn"
+                src={assets[visibleAssetIndex]?.imagePreviewUrl}
+              />
             ) : collection.bannerImageUrl ? (
               <img alt="" className="block w-full rounded object-cover" src={collection.bannerImageUrl} />
             ) : (

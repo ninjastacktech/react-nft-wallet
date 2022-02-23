@@ -22,10 +22,14 @@ const CollectionsList = (props: ICollectionsListNewProps) => {
 
   const collections = props.collections;
   const [assets, setAssets] = React.useState<{ [slug: string]: AssetModel[] }>({});
+  const [stats, setStats] = React.useState<{ [slug: string]: any }>({});
   const [isLoading, setLoading] = React.useState(false);
 
   const assetsResultRef = React.useRef<any>();
   assetsResultRef.current = assets;
+
+  const statsResultRef = React.useRef<any>();
+  statsResultRef.current = stats;
 
   React.useEffect(() => {
     if (!path || !authState?.isAuthenticated || !collections?.length) {
@@ -38,11 +42,16 @@ const CollectionsList = (props: ICollectionsListNewProps) => {
 
     const requestsToMake = collections.map((crtCol) => async () => {
       try {
-        const response = await fetch(`${path.basePath}/assets/${crtCol.slug}/${authState.address}`, {
+        const assetsResponse = await fetch(`${path.basePath}/assets/${crtCol.slug}/${authState.address}`, {
           signal: signal,
         });
-        const currentAssets = await response.json();
+        const currentAssets = await assetsResponse.json();
+        await timeout(500);
 
+        const statsResponse = await fetch(`${path.basePath}/collection/${crtCol.slug}/stats`, {
+          signal: signal,
+        });
+        const currentStats = await statsResponse.json();
         await timeout(1000);
 
         if (!continueUpdates) {
@@ -50,6 +59,9 @@ const CollectionsList = (props: ICollectionsListNewProps) => {
         }
         assetsResultRef.current = { ...assetsResultRef.current, [crtCol.slug]: currentAssets };
         setAssets(assetsResultRef.current);
+
+        statsResultRef.current = { ...statsResultRef.current, [crtCol.slug]: currentStats };
+        setStats(statsResultRef.current);
       } catch (err: any) {
         if (err.name === 'AbortError') {
           console.log('Canceled chain of collections fetch');
@@ -78,7 +90,7 @@ const CollectionsList = (props: ICollectionsListNewProps) => {
         return layout === 'eager' ? (
           <CollectionFull key={col.slug} collection={col} assets={assets[col.slug]}></CollectionFull>
         ) : (
-          <CollectionTile key={col.slug} collection={col} assets={assets[col.slug]} />
+          <CollectionTile key={col.slug} collection={col} assets={assets[col.slug]} stats={stats[col.slug]} />
         );
       })}
     </div>
