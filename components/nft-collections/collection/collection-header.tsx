@@ -11,7 +11,7 @@ const CollectionHeader = (props: ICollectionHeaderProps) => {
   const router = useRouter();
 
   return (
-    <div className="flex flex-row my-8 items-center">
+    <div className="flex flex-row my-8 mx-2 items-center">
       {props.showBackBtn && (
         <svg
           xmlns="http://www.w3.org/2000/svg"
