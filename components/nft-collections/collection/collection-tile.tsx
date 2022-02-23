@@ -41,7 +41,7 @@ const CollectionTile: React.FunctionComponent<ICollectionTileProps> = ({ collect
   return (
     <>
       <a href={href} onClick={collectionClick}>
-        <div className="flex flex-col justify-between bg-slate-100 dark:bg-slate-800 w-60 shadow-lg rounded m-4 transform transition duration-500 hover:scale-110">
+        <div className="flex flex-col justify-between bg-slate-100 dark:bg-slate-800 w-60 h-80 shadow-lg rounded m-4 transform transition duration-500 hover:scale-110">
           {/* <div className="py-2 px-4 text-center tracking-wide grid grid-cols-3 gap-6">
           <div className="flex tools text-slate-900 dark:text-white text-sm font-semibold">
             <p className="flex justify-center items-center">
@@ -98,13 +98,13 @@ const CollectionTile: React.FunctionComponent<ICollectionTileProps> = ({ collect
             <p className="animate-pulse px-2">295</p>
           </div>
         </div> */}
-          <div className="group relative flex justify-center min-h-[2rem]">
+          <div className="group relative flex justify-center min-h-[2rem] h-full">
             {assets?.length > 0 && visibleAssetIndex > -1 ? (
-              <img alt="" className="block w-full rounded" src={assets[visibleAssetIndex]?.imagePreviewUrl} />
+              <img alt="" className="block w-full rounded object-cover animate-fadeIn" src={assets[visibleAssetIndex]?.imagePreviewUrl} />
             ) : collection.bannerImageUrl ? (
-              <img alt="" className="block w-full rounded" src={collection.bannerImageUrl} />
+              <img alt="" className="block w-full rounded object-cover" src={collection.bannerImageUrl} />
             ) : (
-              <img alt="" className="block h-full rounded" src={collection.imageUrl} />
+              <img alt="" className="block h-full rounded object-cover" src={collection.imageUrl} />
             )}
             <div
               className="absolute rounded bg-gradient-to-t from-slate-800/50 w-full h-full top-0 flex group-hover:opacity-100 duration-700 transition justify-between
@@ -161,7 +161,7 @@ const CollectionTile: React.FunctionComponent<ICollectionTileProps> = ({ collect
             </div> */}
             </div>
           </div>
-          <div className="p-2">
+          <div className="p-2 h-20">
             <h3 className="py-1 text-base justify-center">{collection.name}</h3>
             {+collection.stats.floorPrice > 0 && <p className="text-gray-400 text-sm">{collection.stats.floorPrice}</p>}
             {assets == null && <p className="text-gray-400 text-sm animate-pulse">Loading assets...</p>}
